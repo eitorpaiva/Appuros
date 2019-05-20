@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "129828290775",
+    "firebase_url": "https://appuros.firebaseio.com",
+    "project_id": "appuros",
+    "storage_bucket": "appuros.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129828290775:android:3cf6010f2d06be1b",
+        "android_client_info": {
+          "package_name": "com.eitor.tcc.appuros"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129828290775-f46h3hv92tlvhipvcv50hkgn2nn2orkn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8C1G1eIDuZ3tOKwR-cnBhRONWQWUHh6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "129828290775-f46h3hv92tlvhipvcv50hkgn2nn2orkn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129828290775:android:46edd3781812c847",
+        "android_client_info": {
+          "package_name": "com.eitor.tcc.appurosatendente"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129828290775-4e5frhpjisa6ivug10v9hr394re6kq93.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.eitor.tcc.appurosatendente",
+            "certificate_hash": "b34a49558c67be1df160b66582312b8958816a97"
+          }
+        },
+        {
+          "client_id": "129828290775-f46h3hv92tlvhipvcv50hkgn2nn2orkn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8C1G1eIDuZ3tOKwR-cnBhRONWQWUHh6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "129828290775-f46h3hv92tlvhipvcv50hkgn2nn2orkn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

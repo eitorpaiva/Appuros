@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_marginBottom="18dp"
+    tools:context=".BombCadActivity">
+    <View
+        android:id="@+id/linha_azul"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorBombeiro"
+        android:layout_marginBottom="20dp">
+    </View>
+
+    <ScrollView
+        android:id="@+id/login_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cadastro"
+                android:textAlignment="center"
+                android:textColor="@color/colorSAMU"
+                android:textSize="26sp" />
+
+            <EditText
+                android:id="@+id/nome"
+                android:layout_marginVertical="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nome e Sobrenome"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                android:layout_weight=".28"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinnerPatentes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:spinnerMode="dropdown" />
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="7dp"
+                    android:src="@drawable/drop" />
+
+            </RelativeLayout>
+
+            <EditText
+                android:id="@+id/cpf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="CPF"
+                android:inputType="numberSigned"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/endereco"
+                android:layout_marginVertical="18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Endereço"
+                android:inputType="text"
+                android:maxLines="3"
+                android:singleLine="false" />
+
+            <EditText
+                android:id="@+id/telefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Telefone"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+            <EditText
+                android:id="@+id/matricula"
+                android:layout_marginTop="9dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Matrícula"
+                android:inputType="text"
+                android:maxLines="1"
+                android:singleLine="true" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dp"
+                android:layout_weight=".28"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/spinnerSangues"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@android:color/transparent"
+                    android:gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:spinnerMode="dropdown" />
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="7dp"
+                    android:src="@drawable/drop" />
+
+            </RelativeLayout>
+
+
+            <Button
+                android:id="@+id/btnCadastro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textSize="20dp"
+                android:text="Fazer Cadastro"
+                android:textAllCaps="false"
+                android:textColor="#ffffff"
+                android:background="@drawable/my_button_samu"
+                />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

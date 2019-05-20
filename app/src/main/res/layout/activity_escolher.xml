@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChamadasActivity">
+
+    <View
+        android:id="@+id/linha_azul"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimary"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+    </View>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="377dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="237dp"
+        android:layout_marginEnd="17dp"
+        android:layout_marginBottom="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo">
+
+        <Button
+            android:id="@+id/btnPM"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/my_button_pm"
+            android:text="Polícia Militar"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:onClick="abrirPM"
+            />
+
+        <Button
+            android:id="@+id/btnBombeiros"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="10sp"
+            android:background="@drawable/my_button_bomb"
+            android:text="Bombeiros"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:onClick="abrirBomb"
+            />
+
+        <Button
+            android:id="@+id/btnSAMU"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/my_button_samu"
+            android:text="SAMU"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:onClick="abrirSAMU"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="120dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Selecione o órgão que você presta serviço:"
+        android:textAlignment="textEnd"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="316dp"
+        android:layout_height="309dp"
+        android:src="@drawable/ic_bg_chamadas"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo" />
+
+</android.support.constraint.ConstraintLayout>
