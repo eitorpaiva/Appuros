@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/nome_lista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Nome"
+        android:textColor="@color/colorPrimary"
+        android:paddingTop="16dp"
+        android:paddingLeft="16dp"
+        android:textSize="24sp" />
+
+    <View
+        android:id="@+id/linha_lista2"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimary"
+        android:layout_marginBottom="16dp"
+        />
+
+    <TextView
+        android:id="@+id/sangue_lista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:text="Tipo sanguíneo"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/restricao_lista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:text="Restrições Médicas"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/endereco_lista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:text="Endereço"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/contato_lista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:text="Telefone"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/c_emergencia_lista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingBottom="12dp"
+        android:text="Contato de Emergência"
+        android:textSize="18sp" />
+
+    <View
+        android:id="@+id/linha_lista3"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimary"
+        android:layout_marginTop="8dp"
+        />
+
+</LinearLayout>

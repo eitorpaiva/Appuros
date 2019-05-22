@@ -44,8 +44,6 @@ public class SAMUCadActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().setElevation(0);
 
-        System.out.println("jkhdf");
-
         ArrayList<String> sangues = new ArrayList<>();
         sangues.add("A+");
         sangues.add("A-");

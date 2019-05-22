@@ -32,6 +32,10 @@ public class ChamadasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chamadas);
 
+        final String cor1 = "#FF6F00";
+        final String cor2 = "#C62828";
+
+
         final TextView atendente = findViewById(R.id.atendente);
         atendente.setText("Atendente: " + GoogleSignIn.getLastSignedInAccount(this).getGivenName());
         String email = GoogleSignIn.getLastSignedInAccount(this).getEmail();
@@ -63,6 +67,16 @@ public class ChamadasActivity extends AppCompatActivity {
                             Button btn = (Button) findViewById(R.id.voltar);
                             btn.setBackgroundResource(R.drawable.my_button_samu);
 
+                            btn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(ChamadasActivity.this, ListaActivity.class);
+                                    intent.putExtra("cor", "#FF6F00");
+                                    intent.putExtra("servico", "samu");
+                                    startActivity(intent);
+                                }
+                            });
+
                         }
                         if(id.equals("bomb")){
                             String title = "Appuros Atendente";
@@ -80,6 +94,16 @@ public class ChamadasActivity extends AppCompatActivity {
 
                             Button btn = (Button) findViewById(R.id.voltar);
                             btn.setBackgroundResource(R.drawable.my_button_bomb);
+
+                            btn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(ChamadasActivity.this, ListaActivity.class);
+                                    intent.putExtra("cor", "#C62828");
+                                    intent.putExtra("servico", "bomb");
+                                    startActivity(intent);
+                                }
+                            });
                         }
                     }
                 }

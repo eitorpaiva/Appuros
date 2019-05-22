@@ -50,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
                         if (document.exists()) {
                             carregando.hide();
                             carregando.dismiss();
-                            startActivity(new Intent(MainActivity.this, ChamadasActivity.class));
+                            Intent intent = new Intent(MainActivity.this, ListaActivity.class);
+                            intent.putExtra("servico", document.get("id").toString());
+                            startActivity(intent);
                         }
                     } else {
                         Log.d("TAG", "Failed with: ", task.getException());
