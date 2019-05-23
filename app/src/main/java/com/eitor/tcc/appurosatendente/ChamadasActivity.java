@@ -71,9 +71,9 @@ public class ChamadasActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     Intent intent = new Intent(ChamadasActivity.this, ListaActivity.class);
-                                    intent.putExtra("cor", "#FF6F00");
                                     intent.putExtra("servico", "samu");
                                     startActivity(intent);
+
                                 }
                             });
 
@@ -99,9 +99,9 @@ public class ChamadasActivity extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     Intent intent = new Intent(ChamadasActivity.this, ListaActivity.class);
-                                    intent.putExtra("cor", "#C62828");
                                     intent.putExtra("servico", "bomb");
                                     startActivity(intent);
+
                                 }
                             });
                         }

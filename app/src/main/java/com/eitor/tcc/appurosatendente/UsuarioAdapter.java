@@ -1,6 +1,11 @@
 package com.eitor.tcc.appurosatendente;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +45,7 @@ public class UsuarioAdapter extends BaseAdapter {
                     .inflate(R.layout.usuario_item, parent, false);
         }
         Usuario usuario = dados.get(position);
+
 
         TextView nome = convertView.findViewById(R.id.nome_lista);
         nome.setText(usuario.getNome());

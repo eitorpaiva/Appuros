@@ -34,13 +34,24 @@ public class ListaActivity extends AppCompatActivity {
     List<Usuario> usuarios;
     CollectionReference cr;
     FirebaseFirestore db;
+    TextView nomeLista;
+    View l1;
+    View l2;
+    View l3;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().setElevation(0);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista);
+
+        nomeLista = findViewById(R.id.nome_lista);
+        l1 = findViewById(R.id.linha_lista);
+        l2 = findViewById(R.id.linha_lista2);
+        l3 = findViewById(R.id.linha_lista3);
 
         servico = getIntent().getStringExtra("servico");
 
@@ -65,6 +76,24 @@ public class ListaActivity extends AppCompatActivity {
                     int x = 0;
                     for (DocumentSnapshot i : documentos) {
                         if (i.contains("servico")) {
+                            if(servico.equals("samu")){
+                                String title = "Appuros Atendente";
+                                SpannableString s = new SpannableString(title);
+                                s.setSpan(new ForegroundColorSpan(Color.parseColor("#FF6F00")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                getSupportActionBar().setTitle(s);
+                                l1.setBackgroundColor(Color.parseColor("#FF6F00"));
+
+
+                            }
+                            if(servico.equals("bomb")){
+                                String title = "Appuros Atendente";
+                                SpannableString s = new SpannableString(title);
+                                s.setSpan(new ForegroundColorSpan(Color.parseColor("#C62828")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                                getSupportActionBar().setTitle(s);
+
+                                l1.setBackgroundColor(Color.parseColor("#C62828"));
+
+                            }
                             if (i.get("servico").equals(servico)) {
                                 Usuario u = new Usuario(
                                         i.get("contatoEmergencia").toString(),

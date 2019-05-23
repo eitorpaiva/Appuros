@@ -52,6 +52,14 @@ public class MainActivity extends AppCompatActivity {
                             carregando.dismiss();
                             Intent intent = new Intent(MainActivity.this, ListaActivity.class);
                             intent.putExtra("servico", document.get("id").toString());
+
+                            String cor = "";
+                            if (document.get("id").equals("samu"))
+                                cor = "#FF6F00";
+                            else
+                                cor = "#C62828";
+
+                            intent.putExtra("cor", cor);
                             startActivity(intent);
                         }
                     } else {
