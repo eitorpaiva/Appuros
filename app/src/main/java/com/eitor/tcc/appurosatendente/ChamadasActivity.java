@@ -118,6 +118,20 @@ public class ChamadasActivity extends AppCompatActivity {
                                 }
                             });
                         }
+                        if(id.equals("pm")){
+
+                            Button btn = (Button) findViewById(R.id.voltar);
+                            btn.setBackgroundResource(R.drawable.my_button_pm);
+                            btn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(ChamadasActivity.this, ListaActivity.class);
+                                    intent.putExtra("servico", "pm");
+                                    startActivity(intent);
+
+                                }
+                            });
+                        }
                     }
                 }
             }

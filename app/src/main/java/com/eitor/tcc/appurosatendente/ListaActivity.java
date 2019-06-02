@@ -197,7 +197,8 @@ public class ListaActivity extends AppCompatActivity {
                                                 docRef.update(map);
                                                 startActivity(i);
                                             }
-                                        }).show();
+                                        }).setNegativeButton("NÃO", null)
+                                        .show();
                             }
                         }
                     });
