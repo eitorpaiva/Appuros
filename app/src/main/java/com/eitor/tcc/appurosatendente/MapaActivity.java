@@ -72,12 +72,17 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
         LatLng localAtualLegal = new LatLng(lat, lng);
 
-
+        Button btn = findViewById(R.id.btnFinalizar);
 
         LatLng origin;
         if (getIntent().getStringExtra("servico").equals("pm")) {
+           btn.setBackgroundResource(R.drawable.my_button_pm);
             origin = new LatLng(-18.508505, -54.7570933);
+        } else if (getIntent().getStringExtra("servico").equals("bomb")) {
+            btn.setBackgroundResource(R.drawable.my_button_bomb);
+            origin = new LatLng(-18.5220707, -54.7432085);
         } else {
+            btn.setBackgroundResource(R.drawable.my_button_samu);
             origin = new LatLng(-18.5220707, -54.7432085);
         }
 
@@ -85,7 +90,7 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(localAtualLegal).title("Origem"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 14));
 
-            Button btn = findViewById(R.id.btnFinalizar);
+
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
