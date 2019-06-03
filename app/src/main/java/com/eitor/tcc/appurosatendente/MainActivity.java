@@ -27,6 +27,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
     GoogleSignInOptions gso;
     GoogleSignInClient mGoogleSignInClient;
@@ -53,14 +55,14 @@ public class MainActivity extends AppCompatActivity {
                             carregando.dismiss();
                             Intent intent = new Intent(MainActivity.this, ListaActivity.class);
                             intent.putExtra("servico", document.get("id").toString());
-
-                            String cor = "";
-                            if (document.get("id").equals("samu"))
-                                cor = "#FF6F00";
-                            else
-                                cor = "#C62828";
-
-                            intent.putExtra("cor", cor);
+                            intent.putExtra("nome", document.get("nome").toString());
+                            if (document.get("id").equals("bomb")) {
+                                intent.putExtra("cor", "#C62828");
+                            } else if (document.get("id").equals("samu")) {
+                                intent.putExtra("cor", "#FF6F00");
+                            } else {
+                                intent.putExtra("cor", "#385eaa");
+                            }
                             startActivity(intent);
                         }
                     } else {
@@ -68,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
+        } else {
+            carregando.hide();
+            carregando.dismiss();
         }
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -118,8 +123,19 @@ public class MainActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
+                        Log.e("servico", document.get("id").toString());
                         if (document.exists()) {
-                            startActivity(new Intent(MainActivity.this, EscolherActivity.class));
+                            Intent i = new Intent(MainActivity.this, ListaActivity.class);
+                            i.putExtra("servico", document.get("id").toString());
+                            i.putExtra("nome", document.get("nome").toString());
+                            if (document.get("id").equals("bomb")) {
+                                i.putExtra("cor", "#C62828");
+                            } else if (document.get("id").equals("samu")) {
+                                i.putExtra("cor", "#FF6F00");
+                            } else {
+                                i.putExtra("cor", "#385eaa");
+                            }
+                            startActivity(i);
                         } else {
                             startActivity(new Intent(MainActivity.this, EscolherActivity.class));
                         }

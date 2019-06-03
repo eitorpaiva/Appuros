@@ -83,6 +83,14 @@ public class SAMUCadActivity extends AppCompatActivity {
         _telefone = findViewById(R.id.telefone);
         _matricula = findViewById(R.id.matricula);
 
+        if (!getIntent().getExtras().isEmpty()) {
+            _nome.setText(getIntent().getStringExtra("nome"));
+            _cpf.setText(getIntent().getStringExtra("cpf"));
+            _endereco.setText(getIntent().getStringExtra("endereco"));
+            _telefone.setText(getIntent().getStringExtra("telefone"));
+            _matricula.setText(getIntent().getStringExtra("matricula"));
+        }
+
         final Spinner tipoSanguineo = findViewById(R.id.spinnerSangues);
 
         tipoSanguineo.setAdapter(a);
@@ -126,7 +134,11 @@ public class SAMUCadActivity extends AppCompatActivity {
                     else
                         Log.i("falha", "fodeu");
 
-                    startActivity(new Intent(SAMUCadActivity.this, ChamadasActivity.class));
+                    startActivity(
+                            new Intent(SAMUCadActivity.this, ListaActivity.class)
+                                    .putExtra("nome", nome)
+                                    .putExtra("servico", id)
+                    );
                     SAMUCadActivity.this.finish();
 
                 }if (!(CNP.isValidCPF(cpf))){

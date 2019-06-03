@@ -80,6 +80,14 @@ public class BombCadActivity extends AppCompatActivity {
         _telefone = findViewById(R.id.telefone);
         _matricula = findViewById(R.id.matricula);
 
+        if (!getIntent().getExtras().isEmpty()) {
+            _nome.setText(getIntent().getStringExtra("nome"));
+            _cpf.setText(getIntent().getStringExtra("cpf"));
+            _endereco.setText(getIntent().getStringExtra("endereco"));
+            _telefone.setText(getIntent().getStringExtra("telefone"));
+            _matricula.setText(getIntent().getStringExtra("matricula"));
+        }
+
         final Spinner tipoSanguineo = findViewById(R.id.spinnerSangues);
 
         tipoSanguineo.setAdapter(a);
@@ -123,8 +131,11 @@ public class BombCadActivity extends AppCompatActivity {
                     else
                         Log.i("falha", "fodeu");
 
-                    startActivity(new Intent(BombCadActivity.this, ChamadasActivity.class));
-                    BombCadActivity.this.finish();
+                    startActivity(
+                            new Intent(BombCadActivity.this, ListaActivity.class)
+                                    .putExtra("nome", nome)
+                                    .putExtra("servico", id)
+                    );                    BombCadActivity.this.finish();
 
                 }if (!(CNP.isValidCPF(cpf))){
                     new AlertDialog.Builder(BombCadActivity.this)

@@ -157,6 +157,7 @@ public class ListaActivity extends AppCompatActivity {
                     if (x >= documentos.size()) {
                         Intent intent = new Intent(ListaActivity.this, ChamadasActivity.class);
                         intent.putExtra("servico", servico);
+                        intent.putExtra("nome", getIntent().getStringExtra("nome"));
                         startActivity(intent);
                         ListaActivity.this.finish();
                     }
@@ -172,6 +173,12 @@ public class ListaActivity extends AppCompatActivity {
                         public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                             if (usuarios.get(position).getGps() == null) {
                                 // usuario sem dados
+
+                                AlertDialog alertinha = new AlertDialog.Builder(ListaActivity.this)
+                                        .setTitle("Erro")
+                                        .setMessage("O usuário não permitiu acesso à localização.")
+                                        .setPositiveButton("OK", null)
+                                        .show();
                             } else {
                                 final String lat = usuarios.get(position).getGps().split(",")[0];
                                 final String lon = usuarios.get(position).getGps().split(",")[1];
@@ -189,6 +196,7 @@ public class ListaActivity extends AppCompatActivity {
                                                 i.putExtra("nome", usuarios.get(position).getNome());
                                                 i.putExtra("username", usernames.get(position));
                                                 i.putExtra("servico", servico);
+                                                i.putExtra("cor", getIntent().getStringExtra("cor"));
                                                 DocumentReference docRef = db
                                                         .collection("usuarios")
                                                         .document(usernames.get(position));

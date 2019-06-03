@@ -49,6 +49,7 @@ public class UsuarioAdapter extends BaseAdapter {
 
         TextView nome = convertView.findViewById(R.id.nome_lista);
         nome.setText(usuario.getNome());
+        nome.setTextColor(Color.parseColor(((Activity) contexto).getIntent().getStringExtra("cor")));
 
         TextView sangue = convertView.findViewById(R.id.sangue_lista);
         sangue.setText(usuario.getSangue());
@@ -64,6 +65,13 @@ public class UsuarioAdapter extends BaseAdapter {
 
         TextView emergencia = convertView.findViewById(R.id.c_emergencia_lista);
         emergencia.setText("Nº emergência: " + usuario.getContatoEmergencia());
+
+
+        View l2 = convertView.findViewById(R.id.linha_lista2);
+        l2.setBackgroundColor(Color.parseColor(((Activity) contexto).getIntent().getStringExtra("cor")));
+
+        View l3 = convertView.findViewById(R.id.linha_lista3);
+        l3.setBackgroundColor(Color.parseColor(((Activity) contexto).getIntent().getStringExtra("cor")));
         return convertView;
     }
 }
