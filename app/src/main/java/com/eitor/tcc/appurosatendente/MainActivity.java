@@ -1,5 +1,7 @@
 package com.eitor.tcc.appurosatendente;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,6 +42,12 @@ public class MainActivity extends AppCompatActivity {
                 .setTitle("Aguarde")
                 .setMessage("Carregando...")
                 .show();
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        sp.edit().putString("corGlobal","red").apply();
+
+        sp = PreferenceManager.getDefaultSharedPreferences(this);
+        String ss = sp.getString("corGlobal","");
+
         if (GoogleSignIn.getLastSignedInAccount(this) != null) {
             GoogleSignInAccount conta = GoogleSignIn.getLastSignedInAccount(this);
             String e = conta.getEmail();
@@ -123,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         DocumentSnapshot document = task.getResult();
-                        Log.e("servico", document.get("id").toString());
                         if (document.exists()) {
                             Intent i = new Intent(MainActivity.this, ListaActivity.class);
                             i.putExtra("servico", document.get("id").toString());

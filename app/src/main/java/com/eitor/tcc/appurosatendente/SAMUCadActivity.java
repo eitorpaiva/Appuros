@@ -83,7 +83,7 @@ public class SAMUCadActivity extends AppCompatActivity {
         _telefone = findViewById(R.id.telefone);
         _matricula = findViewById(R.id.matricula);
 
-        if (!getIntent().getExtras().isEmpty()) {
+        if (getIntent().getExtras() != null) {
             _nome.setText(getIntent().getStringExtra("nome"));
             _cpf.setText(getIntent().getStringExtra("cpf"));
             _endereco.setText(getIntent().getStringExtra("endereco"));
