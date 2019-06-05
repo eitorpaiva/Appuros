@@ -74,8 +74,8 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
             origin = new LatLng(-18.5220707, -54.7432085);
         }
 
-        mMap.addMarker(new MarkerOptions().position(origin).title(nome));
-        mMap.addMarker(new MarkerOptions().position(localAtualLegal).title("Origem"));
+        mMap.addMarker(new MarkerOptions().position(origin).title("Você"));
+        mMap.addMarker(new MarkerOptions().position(localAtualLegal).title(nome));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 14));
 
 
