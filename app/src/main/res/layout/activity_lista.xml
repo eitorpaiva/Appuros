@@ -34,6 +34,8 @@
         android:layout_marginBottom="16dp"
         android:background="@drawable/mybutton"
         android:text="Histórico"
+        android:textAllCaps="false"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
