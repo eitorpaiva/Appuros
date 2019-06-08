@@ -20,7 +20,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-
 public class MapaActivity extends FragmentActivity implements OnMapReadyCallback {
     FirebaseFirestore db;
     String username;
@@ -98,11 +97,20 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
                         map.put("situacao", FieldValue.delete());
                         map.put("servico", FieldValue.delete());
                         docRef.update(map);
-                        Intent i = new Intent(MapaActivity.this, ListaActivity.class);
-                        i.putExtra("servico", MapaActivity.this.getIntent().getStringExtra("servico"));
-                        i.putExtra("nome", getIntent().getStringExtra("nome"));
-                        i.putExtra("cor", getIntent().getStringExtra("cor"));
-                        startActivity(i);
+
+                        DocumentReference usuario = db.collection("usuarios").document(getIntent().getStringExtra("username"));
+                        Map<String, Object> map2 = new HashMap<>();
+                        map2.put("nome", getIntent().getStringExtra("nome"));
+                        usuario.update(map2).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Intent i = new Intent(MapaActivity.this, ListaActivity.class);
+                                i.putExtra("servico", MapaActivity.this.getIntent().getStringExtra("servico"));
+                                i.putExtra("nome", getIntent().getStringExtra("nome"));
+                                i.putExtra("cor", getIntent().getStringExtra("cor"));
+                                startActivity(i);
+                            }
+                        });
                     }
                 });
             }
