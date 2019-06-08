@@ -3,10 +3,10 @@ package com.eitor.tcc.appurosatendente;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -14,9 +14,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,7 +24,6 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -49,7 +48,7 @@ public class ListaActivity extends AppCompatActivity {
     View l3;
     AlertDialog carregando;
     List<String> usernames;
-
+    Button historico;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +59,8 @@ public class ListaActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista);
+
+        historico = findViewById(R.id.ir_para_historico);
 
 
 
@@ -109,6 +110,7 @@ public class ListaActivity extends AppCompatActivity {
                                 SpannableString s = new SpannableString(title);
                                 s.setSpan(new ForegroundColorSpan(Color.parseColor("#FF6F00")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                                 getSupportActionBar().setTitle(s);
+                                historico.setBackgroundResource(R.drawable.my_button_samu);
                                 l1.setBackgroundColor(Color.parseColor("#FF6F00"));
 
 
@@ -118,7 +120,7 @@ public class ListaActivity extends AppCompatActivity {
                                 SpannableString s = new SpannableString(title);
                                 s.setSpan(new ForegroundColorSpan(Color.parseColor("#C62828")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                                 getSupportActionBar().setTitle(s);
-
+                                historico.setBackgroundResource(R.drawable.my_button_bomb);
                                 l1.setBackgroundColor(Color.parseColor("#C62828"));
 
                             }
@@ -163,6 +165,16 @@ public class ListaActivity extends AppCompatActivity {
                     }
                     Log.i("x", Integer.toString(x));
 
+                    historico.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(ListaActivity.this, HistoricoActivity.class);
+                            intent.putExtra("servico", servico);
+                            intent.putExtra("cor", getIntent().getStringExtra("cor"));
+                            startActivity(intent);
+                        }
+                    });
+
                     carregando.hide();
                     carregando.dismiss();
 
@@ -193,15 +205,23 @@ public class ListaActivity extends AppCompatActivity {
                                             public void onClick(DialogInterface dialog, int which) {
                                                 Intent i = new Intent(ListaActivity.this, MapaActivity.class);
                                                 i.putExtra("gps", lat + "," + lon);
-                                                i.putExtra("nome", usuarios.get(position).getNome());
                                                 i.putExtra("username", usernames.get(position));
                                                 i.putExtra("servico", servico);
                                                 i.putExtra("cor", getIntent().getStringExtra("cor"));
+
+                                                i.putExtra("cpf", usuarios.get(position).getCpf());
+                                                i.putExtra("nome", usuarios.get(position).getNome());
+                                                i.putExtra("sangue", usuarios.get(position).getSangue());
+                                                i.putExtra("resmed", usuarios.get(position).getRestricoes());
+                                                i.putExtra("endereco", usuarios.get(position).getEndereco());
+                                                i.putExtra("telefone", usuarios.get(position).getTelefone());
+                                                i.putExtra("emergencia", usuarios.get(position).getContatoEmergencia());
+
                                                 DocumentReference docRef = db
                                                         .collection("usuarios")
                                                         .document(usernames.get(position));
                                                 Map<String, Object> map = new HashMap<>();
-                                                map.put("situacao", "em atendimento");
+                                                map.put("nome", usuarios.get(position).getNome() + " (em atendimento)");
                                                 docRef.update(map);
                                                 startActivity(i);
                                             }

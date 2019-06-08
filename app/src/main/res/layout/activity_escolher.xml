@@ -17,19 +17,32 @@
         app:layout_constraintTop_toTopOf="parent">
     </View>
 
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:src="@drawable/ic_bg_chamadas"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titulo" />
+
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="377dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="237dp"
-        android:layout_marginEnd="17dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titulo">
+        app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/btnPM"
@@ -37,12 +50,11 @@
             android:layout_height="60dp"
             android:layout_marginBottom="10sp"
             android:background="@drawable/my_button_pm"
+            android:onClick="abrirPM"
             android:text="Polícia Militar"
             android:textAllCaps="false"
             android:textColor="#fff"
-            android:textSize="24sp"
-            android:onClick="abrirPM"
-            />
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/btnBombeiros"
@@ -50,53 +62,39 @@
             android:layout_height="60dp"
             android:layout_marginBottom="10sp"
             android:background="@drawable/my_button_bomb"
+            android:onClick="abrirBomb"
             android:text="Bombeiros"
             android:textAllCaps="false"
             android:textColor="#fff"
-            android:textSize="24sp"
-            android:onClick="abrirBomb"
-            />
+            android:textSize="24sp" />
 
         <Button
             android:id="@+id/btnSAMU"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/my_button_samu"
+            android:onClick="abrirSAMU"
             android:text="SAMU"
             android:textAllCaps="false"
             android:textColor="#fff"
-            android:textSize="24sp"
-            android:onClick="abrirSAMU"
-            />
+            android:textSize="24sp" />
 
     </LinearLayout>
 
     <TextView
         android:id="@+id/titulo"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="11dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="11dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="sans-serif-black"
         android:text="Selecione o órgão que você presta serviço:"
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="316dp"
-        android:layout_height="309dp"
-        android:src="@drawable/ic_bg_chamadas"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titulo" />
 
 </android.support.constraint.ConstraintLayout>

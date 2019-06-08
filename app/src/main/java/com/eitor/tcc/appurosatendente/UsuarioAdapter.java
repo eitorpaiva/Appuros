@@ -1,11 +1,9 @@
 package com.eitor.tcc.appurosatendente;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +16,7 @@ public class UsuarioAdapter extends BaseAdapter {
     private List<Usuario> dados;
     private Context contexto;
 
-    public UsuarioAdapter(List<Usuario> dados, Context contexto) {
+    UsuarioAdapter(List<Usuario> dados, Context contexto) {
         this.dados = dados;
         this.contexto = contexto;
     }
@@ -38,6 +36,7 @@ public class UsuarioAdapter extends BaseAdapter {
         return position;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
@@ -51,14 +50,17 @@ public class UsuarioAdapter extends BaseAdapter {
         nome.setText(usuario.getNome());
         nome.setTextColor(Color.parseColor(((Activity) contexto).getIntent().getStringExtra("cor")));
 
+        TextView cpf = convertView.findViewById(R.id.cpf_lista);
+        cpf.setText("CPF: " + usuario.getCpf());
+
         TextView sangue = convertView.findViewById(R.id.sangue_lista);
-        sangue.setText(usuario.getSangue());
+        sangue.setText("Tipo sanguíneo: " + usuario.getSangue());
 
         TextView resMed = convertView.findViewById(R.id.restricao_lista);
-        resMed.setText(usuario.getRestricoes());
+        resMed.setText("Restrições médicas: " + usuario.getRestricoes());
 
         TextView endereco = convertView.findViewById(R.id.endereco_lista);
-        endereco.setText(usuario.getEndereco());
+        endereco.setText("Moradia: " + usuario.getEndereco());
 
         TextView telefone = convertView.findViewById(R.id.contato_lista);
         telefone.setText("Tel.: " + usuario.getTelefone());

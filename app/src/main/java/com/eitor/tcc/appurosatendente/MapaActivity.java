@@ -12,7 +12,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,7 +25,6 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
     FirebaseFirestore db;
     String username;
     private GoogleMap mMap;
-    private Polyline currentPolyline;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,43 +57,54 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
 
         String nome = getIntent().getStringExtra("nome");
 
-        // Add a marker in Sydney and move the camera
         LatLng localAtualLegal = new LatLng(lat, lng);
 
         Button btn = findViewById(R.id.btnFinalizar);
 
-        LatLng origin;
         if (getIntent().getStringExtra("servico").equals("pm")) {
             btn.setBackgroundResource(R.drawable.my_button_pm);
-            origin = new LatLng(-18.508505, -54.7570933);
         } else if (getIntent().getStringExtra("servico").equals("bomb")) {
             btn.setBackgroundResource(R.drawable.my_button_bomb);
-            origin = new LatLng(-18.5220707, -54.7432085);
         } else {
             btn.setBackgroundResource(R.drawable.my_button_samu);
-            origin = new LatLng(-18.5220707, -54.7432085);
         }
-
-        mMap.addMarker(new MarkerOptions().position(origin).title("Você"));
         mMap.addMarker(new MarkerOptions().position(localAtualLegal).title(nome));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(origin, 14));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(localAtualLegal, 14));
 
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DocumentReference docRef = db
-                        .collection("usuarios")
-                        .document(username);
-                Map<String, Object> map = new HashMap<>();
-                map.put("situacao", FieldValue.delete());
-                map.put("servico", FieldValue.delete());
-                docRef.update(map);
-                Intent i = new Intent(MapaActivity.this, ListaActivity.class);
-                i.putExtra("servico", MapaActivity.this.getIntent().getStringExtra("servico"));
-                i.putExtra("nome", getIntent().getStringExtra("nome"));
-                i.putExtra("cor", getIntent().getStringExtra("cor"));
-                startActivity(i);
+                CollectionReference historico = db
+                        .collection("historico");
+                Map<String, Object> entrada = new HashMap<>();
+
+                entrada.put("nome", getIntent().getStringExtra("nome"));
+                entrada.put("cpf", getIntent().getStringExtra("cpf"));
+                entrada.put("sangue", getIntent().getStringExtra("sangue"));
+                entrada.put("resmed", getIntent().getStringExtra("resmed"));
+                entrada.put("endereco", getIntent().getStringExtra("endereco"));
+                entrada.put("telefone", getIntent().getStringExtra("telefone"));
+                entrada.put("emergencia", getIntent().getStringExtra("emergencia"));
+                entrada.put("servico", getIntent().getStringExtra("servico"));
+
+                historico.add(entrada).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        DocumentReference docRef = db
+                                .collection("usuarios")
+                                .document(username);
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("situacao", FieldValue.delete());
+                        map.put("servico", FieldValue.delete());
+                        docRef.update(map);
+                        Intent i = new Intent(MapaActivity.this, ListaActivity.class);
+                        i.putExtra("servico", MapaActivity.this.getIntent().getStringExtra("servico"));
+                        i.putExtra("nome", getIntent().getStringExtra("nome"));
+                        i.putExtra("cor", getIntent().getStringExtra("cor"));
+                        startActivity(i);
+                    }
+                });
             }
         });
     }

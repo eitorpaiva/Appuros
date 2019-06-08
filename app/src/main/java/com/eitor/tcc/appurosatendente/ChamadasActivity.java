@@ -3,9 +3,9 @@ package com.eitor.tcc.appurosatendente;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -19,23 +19,16 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import java.util.List;
-
-import javax.annotation.Nullable;
 
 public class ChamadasActivity extends AppCompatActivity {
     FirebaseFirestore db;
     CollectionReference colRef;
     String nome, servico;
+    Button historico;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +45,7 @@ public class ChamadasActivity extends AppCompatActivity {
         final String cor1 = "#FF6F00";
         final String cor2 = "#C62828";
 
+        historico = findViewById(R.id.ir_para_historico_chamadas);
 
         final TextView atendente = findViewById(R.id.atendente);
         nome = getIntent().getStringExtra("nome");
@@ -80,7 +74,6 @@ public class ChamadasActivity extends AppCompatActivity {
                     if (document.exists()) {
                         String id = (String) document.get("id");
                         if(id.equals("samu")){
-
                             atendente.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -99,16 +92,17 @@ public class ChamadasActivity extends AppCompatActivity {
                             s.setSpan(new ForegroundColorSpan(Color.parseColor("#FF6F00")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                             getSupportActionBar().setTitle(s);
 
-                            View linha = (View) findViewById(R.id.linha);
+                            View linha = findViewById(R.id.linha);
                             linha.setBackgroundColor(Color.parseColor("#FF6F00"));
 
                             atendente.setTextColor(Color.parseColor("#FF6F00"));
 
-                            ImageView imagem = (ImageView) findViewById(R.id.imgEsperando);
+                            ImageView imagem = findViewById(R.id.imgEsperando);
                             imagem.setImageResource(R.drawable.ic_esperando_chamada_samu);
 
-                            Button btn = (Button) findViewById(R.id.voltar);
+                            Button btn = findViewById(R.id.voltar);
                             btn.setBackgroundResource(R.drawable.my_button_samu);
+                            historico.setBackgroundResource(R.drawable.my_button_samu);
 
                             btn.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -122,13 +116,23 @@ public class ChamadasActivity extends AppCompatActivity {
                                 }
                             });
 
+                            historico.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(ChamadasActivity.this, HistoricoActivity.class);
+                                    intent.putExtra("servico", "samu");
+                                    intent.putExtra("cor", document.get("id").equals("bomb") ? "#C62828" : document.get("id").equals("samu") ? "#FF6F00" : "#385eaa");
+                                    startActivity(intent);
+                                }
+                            });
+
                         }
                         if(id.equals("bomb")){
                             String title = "Appuros Atendente";
                             SpannableString s = new SpannableString(title);
                             s.setSpan(new ForegroundColorSpan(Color.parseColor("#C62828")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                             getSupportActionBar().setTitle(s);
-                            View linha = (View) findViewById(R.id.linha);
+                            View linha = findViewById(R.id.linha);
                             linha.setBackgroundColor(Color.parseColor("#C62828"));
 
                             atendente.setOnClickListener(new View.OnClickListener() {
@@ -147,11 +151,12 @@ public class ChamadasActivity extends AppCompatActivity {
 
                             atendente.setTextColor(Color.parseColor("#C62828"));
 
-                            ImageView imagem = (ImageView) findViewById(R.id.imgEsperando);
+                            ImageView imagem = findViewById(R.id.imgEsperando);
                             imagem.setImageResource(R.drawable.ic_esperando_chamada_bombeiro);
 
-                            Button btn = (Button) findViewById(R.id.voltar);
+                            Button btn = findViewById(R.id.voltar);
                             btn.setBackgroundResource(R.drawable.my_button_bomb);
+                            historico.setBackgroundResource(R.drawable.my_button_bomb);
 
                             btn.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -162,6 +167,16 @@ public class ChamadasActivity extends AppCompatActivity {
                                     intent.putExtra("cor", document.get("id").equals("bomb") ? "#C62828" : document.get("id").equals("samu") ? "#FF6F00" : "#385eaa");
                                     startActivity(intent);
 
+                                }
+                            });
+
+                            historico.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(ChamadasActivity.this, HistoricoActivity.class);
+                                    intent.putExtra("servico", "bomb");
+                                    intent.putExtra("cor", document.get("id").equals("bomb") ? "#C62828" : document.get("id").equals("samu") ? "#FF6F00" : "#385eaa");
+                                    startActivity(intent);
                                 }
                             });
                         }
@@ -180,8 +195,10 @@ public class ChamadasActivity extends AppCompatActivity {
                                 }
                             });
 
-                            Button btn = (Button) findViewById(R.id.voltar);
+                            Button btn = findViewById(R.id.voltar);
                             btn.setBackgroundResource(R.drawable.my_button_pm);
+                            historico.setBackgroundResource(R.drawable.my_button_pm);
+
                             btn.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
@@ -191,6 +208,16 @@ public class ChamadasActivity extends AppCompatActivity {
                                     intent.putExtra("cor", document.get("id").equals("bomb") ? "#C62828" : document.get("id").equals("samu") ? "#FF6F00" : "#385eaa");
                                     startActivity(intent);
 
+                                }
+                            });
+
+                            historico.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(ChamadasActivity.this, HistoricoActivity.class);
+                                    intent.putExtra("servico", "pm");
+                                    intent.putExtra("cor", document.get("id").equals("bomb") ? "#C62828" : document.get("id").equals("samu") ? "#FF6F00" : "#385eaa");
+                                    startActivity(intent);
                                 }
                             });
                         }

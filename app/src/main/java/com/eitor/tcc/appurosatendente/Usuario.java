@@ -31,6 +31,17 @@ public class Usuario {
         this.gps = gps;
     }
 
+    public Usuario(String contatoEmergencia, String cpf, String endereco, String nome, String restricoes, String telefone, String sangue) {
+        this.contatoEmergencia = contatoEmergencia;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.nome = nome;
+        this.restricoes = restricoes;
+        this.telefone = telefone;
+        this.sangue = sangue;
+        this.gps = "LUGAR NENHUM";
+    }
+
     public String getContatoEmergencia() {
         return contatoEmergencia;
     }
