@@ -75,7 +75,7 @@ public class HistoricoActivity extends AppCompatActivity {
                                 i.get("cpf").toString(),
                                 i.get("endereco").toString(),
                                 i.get("nome").toString(),
-                                i.get("resmed").toString(),
+                                i.get("matricula").toString(),
                                 i.get("telefone").toString(),
                                 i.get("sangue").toString()
                         ));

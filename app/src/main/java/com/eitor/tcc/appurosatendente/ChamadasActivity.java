@@ -1,19 +1,27 @@
 package com.eitor.tcc.appurosatendente;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,7 +30,12 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import javax.annotation.Nullable;
 
 public class ChamadasActivity extends AppCompatActivity {
     FirebaseFirestore db;
@@ -30,10 +43,38 @@ public class ChamadasActivity extends AppCompatActivity {
     String nome, servico;
     Button historico;
 
+    public static void tintMenuIcon(Context context, MenuItem item, @ColorRes int color) {
+        Drawable normalDrawable = item.getIcon();
+        Drawable wrapDrawable = DrawableCompat.wrap(normalDrawable);
+        DrawableCompat.setTint(wrapDrawable, context.getResources().getColor(color));
+
+        item.setIcon(wrapDrawable);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         db = FirebaseFirestore.getInstance();
         colRef = db.collection("usuarios");
+
+        colRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot query, @Nullable FirebaseFirestoreException e) {
+                servico = getIntent().getStringExtra("servico");
+                Intent intent = new Intent(new Intent(ChamadasActivity.this, ListaActivity.class));
+                intent.putExtra("servico", servico);
+                intent.putExtra("cor", servico.equals("bomb") ? "#C62828" : servico.equals("samu") ? "#FF6F00" : "#385eaa");
+                int k = 0;
+                for (DocumentSnapshot i : query.getDocuments()) {
+                    if (i.contains("servico")) {
+                        if (i.get("servico").toString().equals(servico)) {
+                            ++k;
+                        }
+                    }
+                }
+                if (k > 0)
+                    startActivity(intent);
+            }
+        });
 
         servico = getIntent().getStringExtra("servico");
 
@@ -225,6 +266,49 @@ public class ChamadasActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+/*
+        MenuItem menuItem = menu.findItem(R.id.mdica);
+        MenuItem menuItem1 = menu.findItem(R.id.mconfig);
+        if (menuItem != null && menuItem1 != null && servico.equals("bomb")) {
+            tintMenuIcon(ChamadasActivity.this, menuItem, R.color.colorBombeiro);
+            tintMenuIcon(ChamadasActivity.this, menuItem1, R.color.colorBombeiro);
+        } else if (menuItem != null && menuItem1 != null && servico.equals("samu")){
+            tintMenuIcon(ChamadasActivity.this, menuItem, R.color.colorSAMU);
+            tintMenuIcon(ChamadasActivity.this, menuItem1, R.color.colorSAMU);
+        } else if (menuItem != null && menuItem1 != null && servico.equals("pm")){
+            tintMenuIcon(ChamadasActivity.this, menuItem, R.color.colorPrimary);
+            tintMenuIcon(ChamadasActivity.this, menuItem1, R.color.colorPrimary);
+        }
+*/
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.mdica:
+                Toast.makeText(this, "Para alterar acessar as opções de seu cadastro, clique no ícone de três pontinhos ao lado.", Toast.LENGTH_LONG)
+                        .show();
+                break;
+            case R.id.msobre:
+                new AlertDialog.Builder(this)
+                        .setMessage("Appuros\nCriado por Eitor Paiva e Mariana Dias.")
+                        .setTitle("Sobre:")
+                        .show();
+                break;
+            case R.id.mconfig:
+                Intent i = new Intent(ChamadasActivity.this, ConfigActivity.class);
+                i.putExtra("servico", servico);
+                i.putExtra("cor", servico.equals("bomb") ? "#C62828" : servico.equals("samu") ? "#FF6F00" : "#385eaa");
+                startActivity(i);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
