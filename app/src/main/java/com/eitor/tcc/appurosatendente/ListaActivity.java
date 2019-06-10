@@ -212,7 +212,7 @@ public class ListaActivity extends AppCompatActivity {
                                                 i.putExtra("cpf", usuarios.get(position).getCpf());
                                                 i.putExtra("nome", usuarios.get(position).getNome());
                                                 i.putExtra("sangue", usuarios.get(position).getSangue());
-                                                i.putExtra("matricula", usuarios.get(position).getRestricoes());
+                                                i.putExtra("resmed", usuarios.get(position).getRestricoes());
                                                 i.putExtra("endereco", usuarios.get(position).getEndereco());
                                                 i.putExtra("telefone", usuarios.get(position).getTelefone());
                                                 i.putExtra("emergencia", usuarios.get(position).getContatoEmergencia());
