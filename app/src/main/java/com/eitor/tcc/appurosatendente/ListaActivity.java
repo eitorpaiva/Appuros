@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -23,17 +26,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Nullable;
 
 public class ListaActivity extends AppCompatActivity {
     String servico;
@@ -79,19 +78,18 @@ public class ListaActivity extends AppCompatActivity {
 
         cr = db.collection("usuarios");
 
-        cr.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-                pqp();
-            }
-        });
-
         carregando = new AlertDialog.Builder(this)
                 .setTitle("Aguarde")
                 .setMessage("Carregando...")
                 .show();
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        pqp();
     }
 
     void pqp() {
@@ -233,5 +231,44 @@ public class ListaActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void atualizar() {
+        Intent i = new Intent(ListaActivity.this, ListaActivity.class);
+        i.putExtra("servico", servico);
+        i.putExtra("cor", getIntent().getStringExtra("cor"));
+        startActivity(i);
+        ListaActivity.this.finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_lista, menu);
+        if (servico.equals("bomb")) {
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_update_bomb_24dp));
+        } else if (servico.equals("samu")) {
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_update_samu_24dp));
+        } else if (servico.equals("pm")) {
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_update_pm_24dp));
+        }
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.matualizar:
+                atualizar();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(ListaActivity.this, ChamadasActivity.class);
+        startActivity(i);
+        ListaActivity.this.finish();
     }
 }

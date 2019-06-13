@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -30,12 +31,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QuerySnapshot;
-
-import javax.annotation.Nullable;
 
 public class ChamadasActivity extends AppCompatActivity {
     FirebaseFirestore db;
@@ -56,25 +52,6 @@ public class ChamadasActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         colRef = db.collection("usuarios");
 
-        colRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@Nullable QuerySnapshot query, @Nullable FirebaseFirestoreException e) {
-                servico = getIntent().getStringExtra("servico");
-                Intent intent = new Intent(new Intent(ChamadasActivity.this, ListaActivity.class));
-                intent.putExtra("servico", servico);
-                intent.putExtra("cor", servico.equals("bomb") ? "#C62828" : servico.equals("samu") ? "#FF6F00" : "#385eaa");
-                int k = 0;
-                for (DocumentSnapshot i : query.getDocuments()) {
-                    if (i.contains("servico")) {
-                        if (i.get("servico").toString().equals(servico)) {
-                            ++k;
-                        }
-                    }
-                }
-                if (k > 0)
-                    startActivity(intent);
-            }
-        });
 
         servico = getIntent().getStringExtra("servico");
 
@@ -271,20 +248,13 @@ public class ChamadasActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_principal, menu);
-/*
-        MenuItem menuItem = menu.findItem(R.id.mdica);
-        MenuItem menuItem1 = menu.findItem(R.id.mconfig);
-        if (menuItem != null && menuItem1 != null && servico.equals("bomb")) {
-            tintMenuIcon(ChamadasActivity.this, menuItem, R.color.colorBombeiro);
-            tintMenuIcon(ChamadasActivity.this, menuItem1, R.color.colorBombeiro);
-        } else if (menuItem != null && menuItem1 != null && servico.equals("samu")){
-            tintMenuIcon(ChamadasActivity.this, menuItem, R.color.colorSAMU);
-            tintMenuIcon(ChamadasActivity.this, menuItem1, R.color.colorSAMU);
-        } else if (menuItem != null && menuItem1 != null && servico.equals("pm")){
-            tintMenuIcon(ChamadasActivity.this, menuItem, R.color.colorPrimary);
-            tintMenuIcon(ChamadasActivity.this, menuItem1, R.color.colorPrimary);
+        if (servico.equals("bomb")) {
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_info_bomb_24dp));
+        } else if (servico.equals("samu")) {
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_info_samu_24dp));
+        } else if (servico.equals("pm")) {
+            menu.getItem(0).setIcon(ContextCompat.getDrawable(this, R.drawable.ic_info_pm_24dp));
         }
-*/
         return super.onCreateOptionsMenu(menu);
     }
 

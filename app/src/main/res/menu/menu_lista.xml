@@ -2,25 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:id="@+id/mmenu"
     android:layout_height="match_parent">
     <item
-        android:id="@+id/mdica"
-        android:icon="@drawable/ic_info_pm_24dp"
+        android:id="@+id/matualizar"
+        android:icon="@drawable/ic_update_24dp"
         android:title="Informações"
         app:showAsAction="always">
-
-    </item>
-
-    <item
-        android:id="@+id/mconfig"
-        android:title="Configurações de Cadastro">
-
-    </item>
-
-    <item
-        android:id="@+id/msobre"
-        android:title="Sobre">
 
     </item>
 

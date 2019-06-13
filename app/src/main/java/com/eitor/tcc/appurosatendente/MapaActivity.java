@@ -3,6 +3,7 @@ package com.eitor.tcc.appurosatendente;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.Button;
 
@@ -115,5 +116,16 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
                 });
             }
         });
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        AlertDialog alertinha = new AlertDialog.Builder(MapaActivity.this)
+                .setTitle("Acesso Negado!")
+                .setMessage("Você não pode voltar até finalizar o atendimento.")
+                .setPositiveButton("OK", null)
+                .show();
     }
 }
