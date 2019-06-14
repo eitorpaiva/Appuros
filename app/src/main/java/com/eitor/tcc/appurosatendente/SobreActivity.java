@@ -9,10 +9,12 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class SobreActivity extends AppCompatActivity {
     String cor, servico;
     Bundle extras;
+    TextView criacao, realizacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,11 @@ public class SobreActivity extends AppCompatActivity {
         View linha = findViewById(R.id.linha_sobre);
         linha.setBackgroundColor(Color.parseColor(extras.getString("cor")));
 
+        criacao = findViewById(R.id.autores);
+        criacao.setTextColor(Color.parseColor(extras.getString("cor")));
+
+        realizacao = findViewById(R.id.realizacao);
+        realizacao.setTextColor(Color.parseColor(extras.getString("cor")));
 
         ImageView btnVoltar = findViewById(R.id.btnVoltarSobre);
         btnVoltar.setBackgroundResource(cor.equals("#385eaa") ? R.drawable.my_button_pm : cor.equals("#C62828") ? R.drawable.my_button_bomb : R.drawable.my_button_samu);
