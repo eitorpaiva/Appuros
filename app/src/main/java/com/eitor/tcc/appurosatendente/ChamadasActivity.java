@@ -10,7 +10,6 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -266,16 +265,16 @@ public class ChamadasActivity extends AppCompatActivity {
                         .show();
                 break;
             case R.id.msobre:
-                new AlertDialog.Builder(this)
-                        .setMessage("Appuros\nCriado por Eitor Paiva e Mariana Dias.")
-                        .setTitle("Sobre:")
-                        .show();
-                break;
-            case R.id.mconfig:
-                Intent i = new Intent(ChamadasActivity.this, ConfigActivity.class);
+                Intent i = new Intent(ChamadasActivity.this, SobreActivity.class);
                 i.putExtra("servico", servico);
                 i.putExtra("cor", servico.equals("bomb") ? "#C62828" : servico.equals("samu") ? "#FF6F00" : "#385eaa");
                 startActivity(i);
+                break;
+            case R.id.mconfig:
+                Intent j = new Intent(ChamadasActivity.this, ConfigActivity.class);
+                j.putExtra("servico", servico);
+                j.putExtra("cor", servico.equals("bomb") ? "#C62828" : servico.equals("samu") ? "#FF6F00" : "#385eaa");
+                startActivity(j);
                 break;
         }
         return super.onOptionsItemSelected(item);

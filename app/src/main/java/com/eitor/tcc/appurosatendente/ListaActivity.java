@@ -268,6 +268,8 @@ public class ListaActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Intent i = new Intent(ListaActivity.this, ChamadasActivity.class);
+        i.putExtra("servico", servico);
+        i.putExtra("cor", getIntent().getStringExtra("cor"));
         startActivity(i);
         ListaActivity.this.finish();
     }

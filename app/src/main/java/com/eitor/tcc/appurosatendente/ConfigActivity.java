@@ -3,6 +3,8 @@ package com.eitor.tcc.appurosatendente;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -71,10 +74,17 @@ public class ConfigActivity extends AppCompatActivity {
         db.collection("atendentes").document(email.substring(0, email.indexOf("@"))).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if (!(fotoURL == null)) {
+                ConnectivityManager cm = (ConnectivityManager) ConfigActivity.this.getSystemService(CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                boolean isConnected = activeNetwork != null &&
+                        activeNetwork.isConnectedOrConnecting();
+
+                if (isConnected && fotoURL != null) {
                     new DownloadImageTask(foto, ConfigActivity.this).execute(fotoURL.toString());
+                    foto.setImageURI(fotoURL);
+                } else {
+                    foto.setImageResource(R.drawable.ic_autorenew_black_24dp);
                 }
-                foto.setImageURI(fotoURL);
                 nome.setText("Nome: " + documentSnapshot.get("nome").toString());
                 cpf.setText("CPF: " + documentSnapshot.get("cpf").toString());
                 patente.setText("Patente: " + documentSnapshot.get("patente").toString());
@@ -96,7 +106,7 @@ public class ConfigActivity extends AppCompatActivity {
         Button btnApagar = findViewById(R.id.btnApagarConfig);
         btnApagar.setBackgroundResource(cor.equals("#385eaa") ? R.drawable.my_button_pm : cor.equals("#C62828") ? R.drawable.my_button_bomb : R.drawable.my_button_samu);
 
-        Button btnVoltar = findViewById(R.id.btnVoltarConfig);
+        ImageView btnVoltar = findViewById(R.id.btnVoltarConfig);
         btnVoltar.setBackgroundResource(cor.equals("#385eaa") ? R.drawable.my_button_pm : cor.equals("#C62828") ? R.drawable.my_button_bomb : R.drawable.my_button_samu);
 
         btnEditar.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +165,22 @@ public class ConfigActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fazerLogout();
+                new AlertDialog.Builder(ConfigActivity.this)
+                        .setMessage("Deseja realmente sair?")
+                        .setTitle("Fazer Logout")
+                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                fazerLogout();
+                            }
+                        })
+                        .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(ConfigActivity.this, "Obrigado por ficar!", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .show();
             }
         });
 

@@ -14,14 +14,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"></View>
 
-    <Button
+    <ImageView
         android:id="@+id/btnVoltarConfig"
-        android:layout_width="104dp"
+        android:layout_width="50dp"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/mybutton"
-        android:text="Voltar"
+        android:src="@drawable/ic_arrow_back_24dp"
         android:textAllCaps="false"
         android:textColor="#fff"
         android:textSize="12sp"
@@ -37,7 +37,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:src="@drawable/ic_bg_chamadas"
+        android:src="@drawable/ic_autorenew_black_24dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayoutCoisas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
