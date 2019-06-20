@@ -24,6 +24,15 @@
         android:layout_marginBottom="16dp"
         />
 
+
+    <TextView
+        android:id="@+id/c_gravidade_lista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:text="Gravidade"
+        android:textSize="18sp" />
+
     <TextView
         android:id="@+id/cpf_lista"
         android:layout_width="match_parent"
@@ -70,8 +79,9 @@
         android:layout_height="wrap_content"
         android:paddingLeft="16dp"
         android:paddingBottom="12dp"
-        android:text="Contato de Emergência"
+        android:text="Nº Emergência"
         android:textSize="18sp" />
+
 
     <View
         android:id="@+id/linha_lista3"

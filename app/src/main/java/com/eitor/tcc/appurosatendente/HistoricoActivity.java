@@ -77,7 +77,8 @@ public class HistoricoActivity extends AppCompatActivity {
                                 i.get("nome").toString(),
                                 i.get("resmed").toString(),
                                 i.get("telefone").toString(),
-                                i.get("sangue").toString()
+                                i.get("sangue").toString(),
+                                i.get("gravidade").toString()
                         ));
                     }
                 }

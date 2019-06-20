@@ -68,6 +68,9 @@ public class UsuarioAdapter extends BaseAdapter {
         TextView emergencia = convertView.findViewById(R.id.c_emergencia_lista);
         emergencia.setText("Nº emergência: " + usuario.getContatoEmergencia());
 
+        TextView gravidade = convertView.findViewById(R.id.c_gravidade_lista);
+        gravidade.setText("Gravidade: " + usuario.getGravidade());
+
 
         View l2 = convertView.findViewById(R.id.linha_lista2);
         l2.setBackgroundColor(Color.parseColor(((Activity) contexto).getIntent().getStringExtra("cor")));

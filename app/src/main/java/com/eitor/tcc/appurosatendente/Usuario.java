@@ -9,9 +9,9 @@ public class Usuario {
     private String restricoes;
     private String telefone;
     private String sangue;
-    int gravidade;
+    private String gravidade;
 
-    public Usuario(String contatoEmergencia, String cpf, String endereco, String nome, String restricoes, String telefone, String sangue, String gps, int gravidade) {
+    public Usuario(String contatoEmergencia, String cpf, String endereco, String nome, String restricoes, String telefone, String sangue, String gps, String gravidade) {
         this.contatoEmergencia = contatoEmergencia;
         this.cpf = cpf;
         this.endereco = endereco;
@@ -23,7 +23,19 @@ public class Usuario {
         this.gravidade = gravidade;
     }
 
-    public int getGravidade() {
+    public Usuario(String contatoEmergencia, String cpf, String endereco, String nome, String restricoes, String telefone, String sangue, String gravidade) {
+        this.contatoEmergencia = contatoEmergencia;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.nome = nome;
+        this.restricoes = restricoes;
+        this.telefone = telefone;
+        this.sangue = sangue;
+        this.gps = "LUGAR NENHUM";
+        this.gravidade = gravidade;
+    }
+
+    public String getGravidade() {
         return gravidade;
     }
 
@@ -37,19 +49,8 @@ public class Usuario {
 
     private String gps;
 
-    public void setGravidade(int gravidade) {
+    public void setGravidade(String gravidade) {
         this.gravidade = gravidade;
-    }
-
-    public Usuario(String contatoEmergencia, String cpf, String endereco, String nome, String restricoes, String telefone, String sangue) {
-        this.contatoEmergencia = contatoEmergencia;
-        this.cpf = cpf;
-        this.endereco = endereco;
-        this.nome = nome;
-        this.restricoes = restricoes;
-        this.telefone = telefone;
-        this.sangue = sangue;
-        this.gps = "LUGAR NENHUM";
     }
 
     public String getContatoEmergencia() {

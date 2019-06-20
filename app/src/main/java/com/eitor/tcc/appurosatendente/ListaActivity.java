@@ -30,8 +30,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,9 +123,6 @@ public class ListaActivity extends AppCompatActivity {
 
                             }
                             if (i.get("servico").equals(servico)) {
-                                Comparator<Usuario> porGravidade = (o1, o2) -> o2.getGravidade() - o1.getGravidade();
-
-                                Collections.sort(usuarios, porGravidade);
                                 Usuario u = new Usuario(
                                         i.get("contatoEmergencia").toString(),
                                         i.get("cpf").toString(),
@@ -137,7 +132,7 @@ public class ListaActivity extends AppCompatActivity {
                                         i.get("telefone").toString(),
                                         i.get("tipoSanguineo").toString(),
                                         null,
-                                        Integer.parseInt(i.get("gravidade").toString())
+                                        i.get("gravidade").toString()
                                 );
                                 if (i.contains("gps")) {
                                     u = new Usuario(
@@ -149,7 +144,7 @@ public class ListaActivity extends AppCompatActivity {
                                             i.get("telefone").toString(),
                                             i.get("tipoSanguineo").toString(),
                                             i.get("gps").toString(),
-                                            Integer.parseInt(i.get("gravidade").toString())
+                                            i.get("gravidade").toString()
                                     );
                                 }
                                 usernames.add(i.getId());
@@ -161,6 +156,7 @@ public class ListaActivity extends AppCompatActivity {
                             ++x;
                         }
                     }
+
 
                     if (x >= documentos.size()) {
                         Intent intent = new Intent(ListaActivity.this, ChamadasActivity.class);
@@ -222,6 +218,7 @@ public class ListaActivity extends AppCompatActivity {
                                                 i.putExtra("endereco", usuarios.get(position).getEndereco());
                                                 i.putExtra("telefone", usuarios.get(position).getTelefone());
                                                 i.putExtra("emergencia", usuarios.get(position).getContatoEmergencia());
+                                                i.putExtra("gravidade", usuarios.get(position).getGravidade());
 
                                                 DocumentReference docRef = db
                                                         .collection("usuarios")

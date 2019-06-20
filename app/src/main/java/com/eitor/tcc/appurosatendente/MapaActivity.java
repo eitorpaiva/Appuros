@@ -82,6 +82,7 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
             entrada.put("endereco", getIntent().getStringExtra("endereco"));
             entrada.put("telefone", getIntent().getStringExtra("telefone"));
             entrada.put("emergencia", getIntent().getStringExtra("emergencia"));
+            entrada.put("gravidade", getIntent().getStringExtra("gravidade"));
             entrada.put("servico", getIntent().getStringExtra("servico"));
 
             historico.add(entrada).addOnSuccessListener(documentReference -> {
