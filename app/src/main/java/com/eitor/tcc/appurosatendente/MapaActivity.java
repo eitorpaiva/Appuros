@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
 import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -13,7 +12,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
@@ -72,49 +70,41 @@ public class MapaActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(localAtualLegal, 14));
 
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CollectionReference historico = db
-                        .collection("historico");
-                Map<String, Object> entrada = new HashMap<>();
+        btn.setOnClickListener(v -> {
+            CollectionReference historico = db
+                    .collection("historico");
+            Map<String, Object> entrada = new HashMap<>();
 
-                entrada.put("nome", getIntent().getStringExtra("nome"));
-                entrada.put("cpf", getIntent().getStringExtra("cpf"));
-                entrada.put("sangue", getIntent().getStringExtra("sangue"));
-                entrada.put("resmed", getIntent().getStringExtra("resmed"));
-                entrada.put("endereco", getIntent().getStringExtra("endereco"));
-                entrada.put("telefone", getIntent().getStringExtra("telefone"));
-                entrada.put("emergencia", getIntent().getStringExtra("emergencia"));
-                entrada.put("servico", getIntent().getStringExtra("servico"));
+            entrada.put("nome", getIntent().getStringExtra("nome"));
+            entrada.put("cpf", getIntent().getStringExtra("cpf"));
+            entrada.put("sangue", getIntent().getStringExtra("sangue"));
+            entrada.put("resmed", getIntent().getStringExtra("resmed"));
+            entrada.put("endereco", getIntent().getStringExtra("endereco"));
+            entrada.put("telefone", getIntent().getStringExtra("telefone"));
+            entrada.put("emergencia", getIntent().getStringExtra("emergencia"));
+            entrada.put("servico", getIntent().getStringExtra("servico"));
 
-                historico.add(entrada).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        DocumentReference docRef = db
-                                .collection("usuarios")
-                                .document(username);
-                        Map<String, Object> map = new HashMap<>();
-                        map.put("situacao", FieldValue.delete());
-                        map.put("servico", FieldValue.delete());
-                        docRef.update(map);
+            historico.add(entrada).addOnSuccessListener(documentReference -> {
+                DocumentReference docRef = db
+                        .collection("usuarios")
+                        .document(username);
+                Map<String, Object> map = new HashMap<>();
+                map.put("situacao", FieldValue.delete());
+                map.put("servico", FieldValue.delete());
+                map.put("gravidade", FieldValue.delete());
+                docRef.update(map);
 
-                        DocumentReference usuario = db.collection("usuarios").document(getIntent().getStringExtra("username"));
-                        Map<String, Object> map2 = new HashMap<>();
-                        map2.put("nome", getIntent().getStringExtra("nome"));
-                        usuario.update(map2).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                Intent i = new Intent(MapaActivity.this, ListaActivity.class);
-                                i.putExtra("servico", MapaActivity.this.getIntent().getStringExtra("servico"));
-                                i.putExtra("nome", getIntent().getStringExtra("nome"));
-                                i.putExtra("cor", getIntent().getStringExtra("cor"));
-                                startActivity(i);
-                            }
-                        });
-                    }
+                DocumentReference usuario = db.collection("usuarios").document(getIntent().getStringExtra("username"));
+                Map<String, Object> map2 = new HashMap<>();
+                map2.put("nome", getIntent().getStringExtra("nome"));
+                usuario.update(map2).addOnSuccessListener(aVoid -> {
+                    Intent i = new Intent(MapaActivity.this, ListaActivity.class);
+                    i.putExtra("servico", MapaActivity.this.getIntent().getStringExtra("servico"));
+                    i.putExtra("nome", getIntent().getStringExtra("nome"));
+                    i.putExtra("cor", getIntent().getStringExtra("cor"));
+                    startActivity(i);
                 });
-            }
+            });
         });
     }
 

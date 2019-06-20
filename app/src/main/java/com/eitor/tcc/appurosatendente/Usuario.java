@@ -9,6 +9,23 @@ public class Usuario {
     private String restricoes;
     private String telefone;
     private String sangue;
+    int gravidade;
+
+    public Usuario(String contatoEmergencia, String cpf, String endereco, String nome, String restricoes, String telefone, String sangue, String gps, int gravidade) {
+        this.contatoEmergencia = contatoEmergencia;
+        this.cpf = cpf;
+        this.endereco = endereco;
+        this.nome = nome;
+        this.restricoes = restricoes;
+        this.telefone = telefone;
+        this.sangue = sangue;
+        this.gps = gps;
+        this.gravidade = gravidade;
+    }
+
+    public int getGravidade() {
+        return gravidade;
+    }
 
     public String getGps() {
         return gps;
@@ -20,15 +37,8 @@ public class Usuario {
 
     private String gps;
 
-    public Usuario(String contatoEmergencia, String cpf, String endereco, String nome, String restricoes, String telefone, String sangue, String gps) {
-        this.contatoEmergencia = contatoEmergencia;
-        this.cpf = cpf;
-        this.endereco = endereco;
-        this.nome = nome;
-        this.restricoes = restricoes;
-        this.telefone = telefone;
-        this.sangue = sangue;
-        this.gps = gps;
+    public void setGravidade(int gravidade) {
+        this.gravidade = gravidade;
     }
 
     public Usuario(String contatoEmergencia, String cpf, String endereco, String nome, String restricoes, String telefone, String sangue) {
