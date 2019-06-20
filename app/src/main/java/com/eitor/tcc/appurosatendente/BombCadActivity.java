@@ -3,9 +3,9 @@ package com.eitor.tcc.appurosatendente;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -113,7 +113,7 @@ public class BombCadActivity extends AppCompatActivity {
                         endereco = _endereco.getEditableText().toString(),
                         telefone = _telefone.getEditableText().toString(),
                         matricula = _matricula.getEditableText().toString();
-                if(CNP.isValidCPF(cpf) && !(nome.isEmpty()) && !(telefone.isEmpty()) && !(endereco.isEmpty())){
+                if (CNP.isValidCPF(cpf) && !(nome.isEmpty()) && !(telefone.isEmpty()) && !(endereco.isEmpty()) && !(matricula.isEmpty())) {
                     db = FirebaseFirestore.getInstance();
                     email = conta.getEmail();
                     Map<String, String> dados = new HashMap<>();

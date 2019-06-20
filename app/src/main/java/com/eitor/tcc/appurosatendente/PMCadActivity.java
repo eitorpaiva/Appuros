@@ -2,9 +2,9 @@ package com.eitor.tcc.appurosatendente;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -12,9 +12,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -104,7 +106,7 @@ public class PMCadActivity extends AppCompatActivity {
                         endereco = _endereco.getEditableText().toString(),
                         telefone = _telefone.getEditableText().toString(),
                         matricula = _matricula.getEditableText().toString();
-                if(CNP.isValidCPF(cpf) && !(nome.isEmpty()) && !(telefone.isEmpty()) && !(endereco.isEmpty())){
+                if (CNP.isValidCPF(cpf) && !(nome.isEmpty()) && !(telefone.isEmpty()) && !(endereco.isEmpty()) && !(matricula.isEmpty())) {
                     db = FirebaseFirestore.getInstance();
                     email = conta.getEmail();
                     Map<String, String> dados = new HashMap<>();
