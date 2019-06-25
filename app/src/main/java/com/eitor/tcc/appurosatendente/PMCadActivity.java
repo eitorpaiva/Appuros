@@ -128,6 +128,7 @@ public class PMCadActivity extends AppCompatActivity {
                             new Intent(PMCadActivity.this, ListaActivity.class)
                                     .putExtra("nome", nome)
                                     .putExtra("servico", id)
+                                    .putExtra("cor", "#385eaa")
                     );
                     PMCadActivity.this.finish();
 

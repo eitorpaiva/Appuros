@@ -138,6 +138,7 @@ public class SAMUCadActivity extends AppCompatActivity {
                             new Intent(SAMUCadActivity.this, ListaActivity.class)
                                     .putExtra("nome", nome)
                                     .putExtra("servico", id)
+                                    .putExtra("cor", "#FF6F00")
                     );
                     SAMUCadActivity.this.finish();
 

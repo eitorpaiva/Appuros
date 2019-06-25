@@ -135,6 +135,7 @@ public class BombCadActivity extends AppCompatActivity {
                             new Intent(BombCadActivity.this, ListaActivity.class)
                                     .putExtra("nome", nome)
                                     .putExtra("servico", id)
+                                    .putExtra("cor", "#C62828")
                     );                    BombCadActivity.this.finish();
 
                 }if (!(CNP.isValidCPF(cpf))){
